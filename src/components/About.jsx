@@ -72,7 +72,7 @@ const About = () => {
 
           <div
             style={{
-              marginLeft: "2rem",
+              
               padding: "2rem",
               border: "1px solid rgba(210,19,18,0.3)",
               borderRadius: "10px",
