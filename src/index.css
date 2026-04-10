@@ -1,0 +1,365 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --primary-red: #D21312;
+  /* Spiderman classic red */
+  --dark-red: #4A0404;
+  --bg-color: #0b0000;
+  --secondary-bg: #1c0202;
+  --text-primary: #ffffff;
+  --text-secondary: #e0e0e0;
+  --accent-blue: #0A3D91;
+  /* Spiderman classic blue */
+  --spider-black: #0d0d0d;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  line-height: 1.6;
+  background-image: url('/web_background.png');
+  background-size: cover;
+  background-attachment: fixed;
+  background-blend-mode: multiply;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Bebas Neue', cursive;
+  letter-spacing: 2px;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Glassmorphism Classes */
+.glass {
+  background: rgba(44, 5, 5, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card {
+  border-radius: 16px;
+  padding: 2rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(210, 19, 18, 0.3);
+}
+
+/* UI Utility Classes */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.section {
+  padding: 6rem 0;
+  position: relative;
+}
+
+.btn-primary {
+  background: var(--primary-red);
+  color: white;
+  padding: 0.75rem 2rem;
+  border-radius: 30px;
+  font-family: 'Bebas Neue', cursive;
+  font-size: 1.25rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.btn-primary:hover {
+  background: white;
+  color: var(--primary-red);
+  box-shadow: 0 0 15px var(--primary-red);
+}
+
+.btn-outline {
+  background: transparent;
+  color: white;
+  padding: 0.75rem 2rem;
+  border-radius: 30px;
+  font-family: 'Bebas Neue', cursive;
+  font-size: 1.25rem;
+  border: 2px solid white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.btn-outline:hover {
+  background: white;
+  color: var(--spider-black);
+}
+
+/* Animations */
+@keyframes swing {
+  20% {
+    transform: rotate3d(0, 0, 1, 15deg);
+  }
+
+  40% {
+    transform: rotate3d(0, 0, 1, -10deg);
+  }
+
+  60% {
+    transform: rotate3d(0, 0, 1, 5deg);
+  }
+
+  80% {
+    transform: rotate3d(0, 0, 1, -5deg);
+  }
+
+  to {
+    transform: rotate3d(0, 0, 1, 0deg);
+  }
+}
+
+.swing:hover {
+  animation: swing 1s ease-in-out;
+  transform-origin: top center;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-red);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--dark-red);
+}
+
+/* Spider Web Background */
+.spider-web-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: repeating-linear-gradient(45deg,
+      rgba(255, 255, 255, 0.04) 0,
+      rgba(255, 255, 255, 0.04) 1px,
+      transparent 1px,
+      transparent 20px);
+  animation: webMove 30s linear infinite;
+  z-index: -1;
+}
+
+@keyframes webMove {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 200px 200px;
+  }
+}
+
+/* Enhanced Animations for 3D Effects */
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(210, 19, 18, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(210, 19, 18, 0.6);
+  }
+}
+
+@keyframes rotate3D {
+  0% {
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+  100% {
+    transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+  }
+}
+
+@keyframes floatUp {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes shineEffect {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes webSpinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes neonGlow {
+  0%, 100% {
+    text-shadow: 0 0 10px rgba(210, 19, 18, 0.8), 0 0 20px rgba(210, 19, 18, 0.4);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(210, 19, 18, 1), 0 0 40px rgba(210, 19, 18, 0.8);
+  }
+}
+
+@keyframes particleFloat {
+  0% {
+    opacity: 0;
+    transform: translateY(100px) translateX(0px);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100px) translateX(100px);
+  }
+}
+
+/* Apply animations to elements */
+.glow-effect {
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+.float-animation {
+  animation: floatUp 3s ease-in-out infinite;
+}
+
+.web-spinner {
+  animation: webSpinner 10s linear infinite;
+}
+
+.neon-text {
+  animation: neonGlow 1.5s ease-in-out infinite;
+}
+
+.shine-effect {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  background-size: 1000px 100%;
+  animation: shineEffect 2s infinite;
+}
+
+/* Button hover effects with animations */
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-primary:hover::before {
+  left: 100%;
+}
+
+/* 3D hover effect */
+.card-3d {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease;
+}
+
+.card-3d:hover {
+  transform: rotateX(5deg) rotateY(5deg) translateZ(20px);
+}
+
+/* Video background settings */
+.video-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.5;
+}
+
+.video-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.8) 100%);
+  pointer-events: none;
+}
+
+/* Responsive animations */
+@media (max-width: 768px) {
+  @keyframes swing {
+    20% {
+      transform: rotate3d(0, 0, 1, 10deg);
+    }
+
+    40% {
+      transform: rotate3d(0, 0, 1, -5deg);
+    }
+
+    60% {
+      transform: rotate3d(0, 0, 1, 3deg);
+    }
+
+    80% {
+      transform: rotate3d(0, 0, 1, -2deg);
+    }
+
+    to {
+      transform: rotate3d(0, 0, 1, 0deg);
+    }
+  }
+
+  .section {
+    padding: 3rem 0;
+  }
+
+  h1, h2 {
+    font-size: 2.5rem !important;
+  }
+}
