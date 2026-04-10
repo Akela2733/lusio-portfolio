@@ -1,51 +1,74 @@
 import React, { useRef, useEffect } from 'react';
 
-const ParallaxSticker = ({ src = '/spider images/parallax sticker.png', speed = 0.3, size = 350 }) => {
+const ParallaxSticker = ({
+    src = '/spider images/parallax sticker.png',
+    speed = 0.3,
+    size = 350
+}) => {
     const containerRef = useRef(null);
     const imgRef = useRef(null);
     const lineRef = useRef(null);
 
     useEffect(() => {
-        // start at top of viewport
+        const isMobile = window.innerWidth <= 768;
+
+        // 📱 MOBILE VERSION (simple static sticker)
+        if (isMobile) {
+            if (imgRef.current) {
+                imgRef.current.style.position = 'fixed';
+                imgRef.current.style.bottom = '20px';
+                imgRef.current.style.right = '10px';
+                imgRef.current.style.top = 'auto';
+                imgRef.current.style.left = 'auto';
+                imgRef.current.style.width = '120px';
+                imgRef.current.style.opacity = '0.8';
+            }
+            if (lineRef.current) {
+                lineRef.current.style.display = 'none';
+            }
+            return;
+        }
+
+        // 💻 DESKTOP PARALLAX VERSION
         const initialTop = 0;
 
         const handleScroll = () => {
             if (!imgRef.current || !lineRef.current) return;
+
             const scrollY = window.scrollY;
             const translateY = scrollY * speed;
 
             const imgHeight = imgRef.current.offsetHeight || size;
-            // compute min/max so the sticker stays fully visible in viewport
-            const minTop = 0; // cannot go above top
-            const maxTop = Math.max(0, window.innerHeight - imgHeight); // cannot go below viewport
+
+            const minTop = 0;
+            const maxTop = Math.max(0, window.innerHeight - imgHeight);
 
             let stickerTop = initialTop + translateY;
-            // clamp into visible area
             stickerTop = Math.min(Math.max(stickerTop, minTop), maxTop);
 
-            // update image position
             imgRef.current.style.top = `${stickerTop}px`;
 
-            // compute center of image to draw rope to (clamped to viewport height)
             const centerY = Math.min(window.innerHeight, stickerTop + imgHeight / 2);
             const lineHeight = Math.max(0, centerY);
             lineRef.current.style.height = `${lineHeight}px`;
 
-            // fade out near bottom of document
-            const opacity = Math.max(0, 1 - scrollY / (document.body.scrollHeight - window.innerHeight));
+            const opacity = Math.max(
+                0,
+                1 - scrollY / (document.body.scrollHeight - window.innerHeight)
+            );
+
             imgRef.current.style.opacity = opacity;
             lineRef.current.style.opacity = opacity;
         };
 
-        const handleLoad = () => handleScroll();
         window.addEventListener('scroll', handleScroll, { passive: true });
-        window.addEventListener('load', handleLoad);
-        // also call once
+        window.addEventListener('load', handleScroll);
+
         handleScroll();
 
         return () => {
             window.removeEventListener('scroll', handleScroll);
-            window.removeEventListener('load', handleLoad);
+            window.removeEventListener('load', handleScroll);
         };
     }, [speed, size]);
 
@@ -63,7 +86,7 @@ const ParallaxSticker = ({ src = '/spider images/parallax sticker.png', speed = 
                 overflow: 'visible'
             }}
         >
-            {/* vertical white rope */}
+            {/* 🧵 Rope (desktop only) */}
             <div
                 ref={lineRef}
                 style={{
@@ -79,13 +102,14 @@ const ParallaxSticker = ({ src = '/spider images/parallax sticker.png', speed = 
                 }}
             />
 
+            {/* 🕷 Sticker */}
             <img
                 ref={imgRef}
                 src={src}
                 alt="parallax sticker"
                 style={{
                     position: 'absolute',
-                    top: `${Math.max(-size * 0.5, -50)}px`, // start slightly above viewport center
+                    top: `${Math.max(-size * 0.5, -50)}px`,
                     left: '50%',
                     transform: 'translateX(-50%)',
                     width: `${size}px`,
