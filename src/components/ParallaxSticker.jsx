@@ -21,7 +21,7 @@ const ParallaxSticker = ({
                 imgRef.current.style.top = 'auto';
                 imgRef.current.style.left = 'auto';
                 imgRef.current.style.width = '120px';
-                imgRef.current.style.opacity = '0.8';
+                imgRef.current.style.opacity = '0.6';
             }
             if (lineRef.current) {
                 lineRef.current.style.display = 'none';
