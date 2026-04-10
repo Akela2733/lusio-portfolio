@@ -2,7 +2,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Download, Feather } from 'lucide-react';
 
-// ✅ Import video (recommended way)
 import bgVideo from "../assets/Spider-images/miles-morales-in-the-rain-spiderman-into-the-spiderverse-moewalls-com.mp4";
 
 const Hero = () => {
@@ -28,7 +27,6 @@ const Hero = () => {
             }}
         >
 
-            {/* 🎥 Background Video */}
             <video
                 autoPlay
                 loop
@@ -47,7 +45,6 @@ const Hero = () => {
                 <source src={bgVideo} type="video/mp4" />
             </video>
 
-            {/* 🌑 Dark Overlay */}
             <div
                 style={{
                     position: 'absolute',
@@ -60,7 +57,6 @@ const Hero = () => {
                 }}
             />
 
-            {/* 📦 Content */}
             <div
                 className="container"
                 style={{
